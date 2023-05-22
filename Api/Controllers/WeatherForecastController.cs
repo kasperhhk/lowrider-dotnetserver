@@ -66,6 +66,9 @@ public class WebSocketController : ControllerBase
         }
       };
 
+      // Welcome message
+      chatClient.ToClient(new ServerChatMessage("server", "Welcome! :3"));
+
       // ToServer loop
       var readBuffer = new byte[1024];
       while (ws.State is WebSocketState.Open)
@@ -137,7 +140,7 @@ public interface IChatClient : IDisposable
   void ToClient(ServerChatMessage message);
 }
 
-public record ServerChatMessage(DateTimeOffset timestamp, string sender, string message);
+public record ServerChatMessage(string sender, string message);
 public record ClientChatMessage(string message);
 
 public class ChatService : IChatService
@@ -194,6 +197,6 @@ public class ChatClient : IChatClient
 
   public void ToServer(ClientChatMessage message)
   {
-    _chatService.Send(new ServerChatMessage(DateTimeOffset.UtcNow, Username, message.message));
+    _chatService.Send(new ServerChatMessage(Username, message.message));
   }
 }
