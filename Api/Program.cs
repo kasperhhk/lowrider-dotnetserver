@@ -1,12 +1,11 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Api.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddChatFeature();
+builder.Services.AddAllFeatures();
 builder.Services.AddSingleton(new JsonSerializerOptions
 {
   Converters = { new JsonStringEnumConverter() },
