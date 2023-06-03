@@ -11,9 +11,9 @@ public class WebSocketController : ControllerBase
   private readonly IClientManager _clientManager;
   private readonly ILogger<WebSocketController> _logger;
   private readonly IHostApplicationLifetime _hostApplicationLifetime;
-  private readonly IMessageCentral _messageCentral;
+  private readonly IInboundMessageCentral _messageCentral;
 
-  public WebSocketController(IWebSocketClientFactory clientFactory, IClientManager clientManager, ILogger<WebSocketController> logger, IHostApplicationLifetime hostApplicationLifetime, IMessageCentral messageCentral)
+  public WebSocketController(IWebSocketClientFactory clientFactory, IClientManager clientManager, ILogger<WebSocketController> logger, IHostApplicationLifetime hostApplicationLifetime, IInboundMessageCentral messageCentral)
   {
     _clientFactory = clientFactory;
     _clientManager = clientManager;

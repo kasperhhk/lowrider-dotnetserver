@@ -1,14 +1,12 @@
 namespace K;
 
-public class WebSocketMessageCentral : IMessageCentral
+public class OutboundWebSocketMessageCentral : IOutboundMessageCentral
 {
-  private readonly IEnumerable<IMessageHandler> _messageHandlers;
   private readonly IHostApplicationLifetime _hostApplicationLifetime;
   private readonly IWebSocketSerializationStrategy _serializationStrategy;
 
-  public WebSocketMessageCentral(IEnumerable<IMessageHandler> messageHandlers, IHostApplicationLifetime hostApplicationLifetime, IWebSocketSerializationStrategy serializationStrategy)
+  public OutboundWebSocketMessageCentral(IHostApplicationLifetime hostApplicationLifetime, IWebSocketSerializationStrategy serializationStrategy)
   {
-    _messageHandlers = messageHandlers;
     _hostApplicationLifetime = hostApplicationLifetime;
     _serializationStrategy = serializationStrategy;
   }
@@ -39,6 +37,20 @@ public class WebSocketMessageCentral : IMessageCentral
         await Task.WhenAll(sendings);
       }
     }, cancellationToken);
+  }
+}
+
+public class InboundWebSocketMessageCentral : IInboundMessageCentral
+{
+  private readonly IEnumerable<IMessageHandler> _messageHandlers;
+  private readonly IHostApplicationLifetime _hostApplicationLifetime;
+  private readonly IWebSocketSerializationStrategy _serializationStrategy;
+
+  public InboundWebSocketMessageCentral(IEnumerable<IMessageHandler> messageHandlers, IHostApplicationLifetime hostApplicationLifetime, IWebSocketSerializationStrategy serializationStrategy)
+  {
+    _messageHandlers = messageHandlers;
+    _hostApplicationLifetime = hostApplicationLifetime;
+    _serializationStrategy = serializationStrategy;
   }
 
   public void Deliver(IUser sender, IInboundMessage message)

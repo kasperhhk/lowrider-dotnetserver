@@ -2,10 +2,10 @@ namespace K;
 
 public class ChatMessageHandler : IMessageHandler
 {
-  private readonly IMessageCentral _messageCentral;
+  private readonly IOutboundMessageCentral _messageCentral;
   private readonly IClientManager _clientManager;
 
-  public ChatMessageHandler(IMessageCentral messageCentral, IClientManager clientManager)
+  public ChatMessageHandler(IOutboundMessageCentral messageCentral, IClientManager clientManager)
   {
     _messageCentral = messageCentral;
     _clientManager = clientManager;
