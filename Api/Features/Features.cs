@@ -1,7 +1,14 @@
 using Api.Features.WebSockets;
 
-public static class Features {
+namespace K;
+
+public static class Features
+{
   public static IServiceCollection AddAllFeatures(this IServiceCollection serviceCollection)
     => serviceCollection
-      .AddWebSocketsFeature();
+      .AddWebSocketsFeature()
+      .AddUsersFeature()
+      .AddSerializationFeature()
+      .AddMessagingFeature()
+      .AddChatFeature();
 }

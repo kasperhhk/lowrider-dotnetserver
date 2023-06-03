@@ -1,3 +1,8 @@
-namespace Api.Features.Users;
+namespace K;
 
-public record User(string Username);
+public interface IUser
+{
+  string Id { get; }
+}
+
+public record User(string Id) : IUser;
