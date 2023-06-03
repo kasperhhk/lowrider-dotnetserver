@@ -62,7 +62,7 @@ public class WebSocketClient : IWebSocketClient
       var bufferOwner = MemoryPool<byte>.Shared.Rent(FrameSegmentSize);
       var buffer = bufferOwner.Memory;
 
-      var received = await _webSocket.ReceiveAsync(buffer, CancellationToken.None);
+      var received = await _webSocket.ReceiveAsync(buffer, cancellationToken);
       if (received.MessageType == WebSocketMessageType.Close)
       {
         bufferOwner.Dispose();
