@@ -12,9 +12,9 @@ public class WebSocketController : ControllerBase
     private readonly IWebSocketClientFactory _clientFactory;
     private readonly ILogger<WebSocketController> _logger;
     private readonly IHostApplicationLifetime _hostApplicationLifetime;
-    private readonly MessageBroker _messageBroker;
+    private readonly IMessageBroker _messageBroker;
 
-    public WebSocketController(IWebSocketClientFactory clientFactory, ILogger<WebSocketController> logger, IHostApplicationLifetime hostApplicationLifetime, MessageBroker messageBroker)
+    public WebSocketController(IWebSocketClientFactory clientFactory, ILogger<WebSocketController> logger, IHostApplicationLifetime hostApplicationLifetime, IMessageBroker messageBroker)
     {
         _clientFactory = clientFactory;
         _logger = logger;

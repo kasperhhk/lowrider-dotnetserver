@@ -17,10 +17,10 @@ public record OutboundChatMessage(string user, string message)
 
 public class IncomingChatMessageHandler : IChatHandler<IncomingChatMessage>
 {
-    private readonly MessageBroker _messageBroker;
+    private readonly IMessageBroker _messageBroker;
     private readonly IRecipientsResolver _recipientsResolver;
 
-    public IncomingChatMessageHandler(MessageBroker messageBroker, IRecipientsResolver recipientsResolver)
+    public IncomingChatMessageHandler(IMessageBroker messageBroker, IRecipientsResolver recipientsResolver)
     {
         _messageBroker = messageBroker;
         _recipientsResolver = recipientsResolver;
