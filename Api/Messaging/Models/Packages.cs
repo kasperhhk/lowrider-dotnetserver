@@ -6,3 +6,16 @@ public interface IIncomingPayload
 {
     T Deserialize<T>();
 }
+
+public record PassThroughIncomingPayload(object Payload) : IIncomingPayload
+{
+    public T Deserialize<T>()
+    {
+        return (T)Payload;
+    }
+
+    public static PassThroughIncomingPayload From<T>(T payload) where T : notnull
+    {
+        return new PassThroughIncomingPayload(payload);
+    }
+}
