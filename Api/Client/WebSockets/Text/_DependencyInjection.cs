@@ -2,7 +2,7 @@
 
 namespace Api.Client.WebSockets.Text;
 
-public static class _DependencyInjection
+public static class DependencyInjection
 {
     public static IServiceCollection AddTextWebSocketClient(this IServiceCollection services)
         => services
