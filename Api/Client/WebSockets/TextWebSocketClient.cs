@@ -67,6 +67,9 @@ public class TextWebSocketClient : IWebSocketClient
                 break;
             }
 
+            if (received.MessageType != WebSocketMessageType.Text)
+                throw new Exception("Invalid websocket message type");
+
             var receivedBuffer = buffer.Slice(0, received.Count);
             messageFrame.Add(bufferOwner, receivedBuffer);
 
