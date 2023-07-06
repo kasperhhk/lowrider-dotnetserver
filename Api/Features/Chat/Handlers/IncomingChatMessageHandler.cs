@@ -1,5 +1,5 @@
-﻿using Api.Features.Chat;
-using Api.Messaging;
+﻿using Api.Messaging;
+using Api.Messaging.Models;
 using Api.Messaging.Recipients;
 using Api.Users;
 

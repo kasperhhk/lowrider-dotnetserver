@@ -1,10 +1,16 @@
-﻿using Api.Messaging;
+﻿using Api.Messaging.Models;
 using System.Text;
 using System.Text.Json;
 
 namespace Api.Serialization.Json;
 
-public class JsonPackageSerializer : IPackageSerializer
+public interface IJsonPackageSerializer
+{
+    IncomingPackage Deserialize(ReadOnlySpan<byte> data);
+    byte[] Serialize<TPayload>(OutgoingPackage<TPayload> package) where TPayload : notnull;
+}
+
+public class JsonPackageSerializer : IJsonPackageSerializer
 {
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
@@ -39,7 +45,7 @@ public class JsonPackageSerializer : IPackageSerializer
         var jsonPayload = JsonSerializer.Serialize(package.Payload, _jsonSerializerOptions);
         var str = $"{package.Feature}:{package.Command}:{jsonPayload}";
         var bytes = Encoding.UTF8.GetBytes(str);
-        
+
         return bytes;
     }
 }

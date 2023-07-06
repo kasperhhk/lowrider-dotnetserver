@@ -1,5 +1,6 @@
 ﻿using Api.Features.Chat.Handlers;
 using Api.Messaging;
+using Api.Messaging.Models;
 using Api.Users;
 
 namespace Api.Features.Chat;

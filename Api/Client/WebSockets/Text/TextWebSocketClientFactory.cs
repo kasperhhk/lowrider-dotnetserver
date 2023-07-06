@@ -1,16 +1,16 @@
-﻿using Api.Serialization;
+﻿using Api.Serialization.Json;
 using Api.Users;
 using System.Net.WebSockets;
 
-namespace Api.Client.WebSockets;
+namespace Api.Client.WebSockets.Text;
 
 public class TextWebSocketClientFactory : IWebSocketClientFactory
 {
     private readonly ILogger<TextWebSocketClient> _clientLogger;
-    private readonly IPackageSerializer _packageSerializer;
+    private readonly IJsonPackageSerializer _packageSerializer;
     private readonly IClientManager _clientManager;
 
-    public TextWebSocketClientFactory(ILogger<TextWebSocketClient> clientLogger, IPackageSerializer packageSerializer, IClientManager clientManager)
+    public TextWebSocketClientFactory(ILogger<TextWebSocketClient> clientLogger, IJsonPackageSerializer packageSerializer, IClientManager clientManager)
     {
         _clientLogger = clientLogger;
         _packageSerializer = packageSerializer;

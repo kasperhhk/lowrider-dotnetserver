@@ -1,12 +1,12 @@
 ﻿using Api.Client.WebSockets.Memory;
-using Api.Messaging;
-using Api.Serialization;
+using Api.Messaging.Models;
+using Api.Serialization.Json;
 using Api.Users;
 using System.Buffers;
 using System.Net.WebSockets;
 using System.Runtime.CompilerServices;
 
-namespace Api.Client.WebSockets;
+namespace Api.Client.WebSockets.Text;
 
 public class TextWebSocketClient : IWebSocketClient
 {
@@ -15,12 +15,12 @@ public class TextWebSocketClient : IWebSocketClient
 
     private readonly WebSocket _webSocket;
     private readonly ILogger<TextWebSocketClient> _logger;
-    private readonly IPackageSerializer _packageSerializer;
+    private readonly IJsonPackageSerializer _packageSerializer;
 
     public IUser User { get; }
     public string Id { get; }
 
-    public TextWebSocketClient(WebSocket webSocket, IUser user, ILogger<TextWebSocketClient> logger, IPackageSerializer packageSerializer)
+    public TextWebSocketClient(WebSocket webSocket, IUser user, ILogger<TextWebSocketClient> logger, IJsonPackageSerializer packageSerializer)
     {
         _webSocket = webSocket;
         User = user;

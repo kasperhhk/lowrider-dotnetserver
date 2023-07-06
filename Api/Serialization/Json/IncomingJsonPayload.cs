@@ -1,4 +1,4 @@
-﻿using Api.Messaging;
+﻿using Api.Messaging.Models;
 using System.Text.Json;
 
 namespace Api.Serialization.Json;

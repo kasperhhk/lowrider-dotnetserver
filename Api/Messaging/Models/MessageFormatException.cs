@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Api.Messaging;
+namespace Api.Messaging.Models;
 
 public class MessageFormatException : MessageException
 {

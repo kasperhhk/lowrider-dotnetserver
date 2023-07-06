@@ -1,4 +1,5 @@
-﻿using Api.Users;
+﻿using Api.Messaging.Models;
+using Api.Users;
 
 namespace Api.Messaging;
 

@@ -1,5 +1,5 @@
 ﻿using Api.Client;
-using Api.Serialization;
+using Api.Messaging.Models;
 using Api.Users;
 
 namespace Api.Messaging;
@@ -13,26 +13,24 @@ public interface IMessageBroker
 public class MessageBroker : IMessageBroker
 {
     private readonly IClientManager _clientManager;
-    private readonly IPackageSerializer _packageSerializer;
     private readonly IHostApplicationLifetime _hostApplicationLifetime;
     private readonly IDictionary<string, IFeatureHandler> _featureHandlers;
+    private readonly IEnumerable<IClientSender> _clientSenders;
 
-    public MessageBroker(IClientManager clientManager, IPackageSerializer packageSerializer, IHostApplicationLifetime hostApplicationLifetime, IEnumerable<IFeatureHandler> featureHandlers)
+    public MessageBroker(IClientManager clientManager, IHostApplicationLifetime hostApplicationLifetime, IEnumerable<IFeatureHandler> featureHandlers, IEnumerable<IClientSender> clientSenders)
     {
         _clientManager = clientManager;
-        _packageSerializer = packageSerializer;
         _hostApplicationLifetime = hostApplicationLifetime;
         _featureHandlers = featureHandlers.ToDictionary(_ => _.Name);
+        _clientSenders = clientSenders;
     }
 
     public Task Send<TPayload>(Recipients.Recipients recipients, OutgoingPackage<TPayload> package) where TPayload : notnull
     {
-        var serializedPackage = _packageSerializer.Serialize(package);
-
-        foreach (var client in recipients.Clients)
+        foreach (var sender in _clientSenders)
         {
             // Fire and forget
-            client.Send(serializedPackage, _hostApplicationLifetime.ApplicationStopping);
+            sender.Send(recipients.Clients, package, _hostApplicationLifetime.ApplicationStopping);
         }
 
         return Task.CompletedTask;
