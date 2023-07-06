@@ -1,12 +1,12 @@
+using Api;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using K;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddAllFeatures();
+builder.Services.AddPackageServer();
 builder.Services.AddSingleton(new JsonSerializerOptions
 {
   Converters = { new JsonStringEnumConverter() },
