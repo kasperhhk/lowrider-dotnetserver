@@ -5,10 +5,14 @@ using Api.Users;
 
 namespace Api.Features.Chat;
 
+public static class ChatFeature
+{
+    public const string Name = "CHAT";
+}
+
 public class ChatFeatureHandler : IFeatureHandler
 {
-    public const string FeatureName = "CHAT";
-    public string Name => FeatureName;
+    public string Name => ChatFeature.Name;
 
     private readonly IServiceProvider _serviceProvider;
 
