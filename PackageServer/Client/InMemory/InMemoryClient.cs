@@ -12,7 +12,7 @@ public class InMemoryClient : ISendableClient<InMemoryOutgoingPackage>
     public string Id { get; } = Guid.NewGuid().ToString("D");
     public IUser User { get; }
 
-    public InMemoryClient(IUser user, ILogger<InMemoryClient> logger)
+    internal InMemoryClient(IUser user, ILogger<InMemoryClient> logger)
     {
         User = user;
         _logger = logger;

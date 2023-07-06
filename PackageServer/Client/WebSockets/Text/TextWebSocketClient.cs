@@ -21,7 +21,7 @@ public class TextWebSocketClient : IWebSocketClient
     public IUser User { get; }
     public string Id { get; }
 
-    public TextWebSocketClient(WebSocket webSocket, IUser user, ILogger<TextWebSocketClient> logger, IJsonPackageSerializer packageSerializer)
+    internal TextWebSocketClient(WebSocket webSocket, IUser user, ILogger<TextWebSocketClient> logger, IJsonPackageSerializer packageSerializer)
     {
         _webSocket = webSocket;
         User = user;
