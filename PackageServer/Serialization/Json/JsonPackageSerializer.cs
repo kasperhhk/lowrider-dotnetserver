@@ -34,7 +34,7 @@ public class JsonPackageSerializer : IJsonPackageSerializer
             throw new MessageFormatException("Missing payload");
 
         var feature = str.Substring(0, first);
-        var command = str.Substring(first + 1, second);
+        var command = str.Substring(first + 1, second - (first + 1));
         var jsonPayload = str.Substring(second + 1);
 
         return new IncomingPackage(feature, command, new IncomingJsonPayload(_jsonSerializerOptions, jsonPayload));
