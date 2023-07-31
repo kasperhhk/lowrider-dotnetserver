@@ -22,6 +22,11 @@ var app = builder.Build();
 
 app.MapControllers();
 
+app.MapGet("/", async (httpContext) =>
+{
+    await httpContext.Response.WriteAsJsonAsync(new { Success = true });
+});
+
 app.UseWebSockets();
 
 app.Run();
